@@ -1,0 +1,120 @@
+{
+    "extends": [
+      "airbnb-typescript/base",
+      "plugin:boundaries/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "plugins": ["import", "boundaries"],
+    "rules": {
+      "eol-last": ["error", "always"],
+      "object-property-newline": "error",
+      "key-spacing": [
+        "error",
+        {
+          "beforeColon": false
+        }
+      ],
+      "prefer-const": "error",
+      "no-var": "error",
+      "class-methods-user-this": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "args": "none"
+        }
+      ],
+      "max-len": ["warn", 120],
+      "import/prefer-default-export": "off",
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": ["**/*.test.ts", "**/*.spec.ts", "jest.config.js", "**/*.mock.ts"]
+        }
+      ],
+      "linebreak-style": "off",
+      "@typescript-eslint/no-redeclare": "off",
+      "boundaries/entry-point": "off",
+      "boundaries/element-types": [
+        2,
+        {
+          "default": "disallow",
+          "rules": [
+            {
+              "from": ["adapters"],
+              "allow": [
+                ["adapters"], 
+                ["usecases"], 
+                ["entities"],
+                ["external", { "family": "dependency-injection" }]
+              ]
+            },
+            {
+              "from": ["external"],
+              "allow": ["external", "adapters", "main", "usecases"]
+            },
+            {
+              "from": ["main"],
+              "allow": ["main", "adapters", "external", "usecases"]
+            },
+            {
+              "from": ["usecases"],
+              "allow": [
+                ["usecases"], 
+                ["main", { "family": "config" }]
+              ]
+            }
+          ]
+        }
+      ],
+      "padding-line-between-statements": "off",
+      "@typescript-eslint/padding-line-between-statements": [
+        "error",
+        {
+          "blankLine": "always",
+          "prev": "*",
+          "next": ["interface", "type", "class"]
+        }
+      ],
+      "@typescript-eslint/member-delimiter-style": [
+       "error",
+       {
+           "multiline": {
+               "delimiter": "semi",
+               "requireLast": true
+           }
+       }
+     ]
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {
+          "alwaysTryTypes": true
+        }
+      },
+      "boundaries/elements": [
+        {
+          "type": "adapters",
+          "pattern": "adapters/*"
+        },
+        {
+          "type": "external",
+          "pattern": "external/*",
+          "capture": ["family", "dependency-injection"]
+        },
+        {
+          "type": "main",
+          "pattern": "main/*",
+          "capture": ["family", "config"]
+        },
+        {
+          "type": "usecases",
+          "pattern": "usecases/*"
+        }
+      ],
+      "boundaries/include": ["src/**/*.*"],
+      "boundaries/ignore": ["**/*.spec.js", "**/*.test.ts"]
+    }
+  }

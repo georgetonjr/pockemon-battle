@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  database: 
+    image: mcr.microsoft.com/mssql/server
+    container_name: mssql
+    environment:
+      - ACCEPT_EULA="Y"
+      - MSSQL_SA_PASSWORD=vq9*JD&bTdTeZLdT
+      - MSSQL_PID=Developer
+    ports:
+      - 1433:1433
+    networks:
+      - pokemon-battle
+
+networks:
+  pokemon-battle:
+    driver: bridge
