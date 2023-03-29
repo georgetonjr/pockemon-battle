@@ -1,7 +1,6 @@
 import { Sequelize } from 'sequelize';
 import { config } from '../../main/config';
 import PokemonEntity from './entities/pokemon-entity';
-import { PolemonRepositorySequelize } from './repositories/pokemon-repository-sequelize';
 
 const models = [PokemonEntity];
 
@@ -15,16 +14,4 @@ export const sequelizeConnection =
 
 models.forEach(model => model.initialize(sequelizeConnection));
 
-// new PolemonRepositorySequelize().updateOne(1, { treinador: 'voce' }).then(res => console.log(res));
-
-new PolemonRepositorySequelize().deleteOne(1).then(res => console.log(res));
-
-new PolemonRepositorySequelize().list().then(res => console.log(res));
-
 export { sequelizeConnection as Database, PokemonEntity as pokemonEntity };
-
-// Server:  desafio-jazida.database.windows.net
-//    Database: Desafio-jz
-//    User: DesafioAdmin
-//    Pass: Picachu123
-//    Schema: schema-georgeton
