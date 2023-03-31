@@ -10,6 +10,9 @@ process.env.ENVIRONMENT = process.env.ENVIRONMENT || process.env.NODE_ENV;
 export const config = {
   SERVER_PORT: process.env.SERVER_PORT,
 
+  SWAGGER_FAV_ICON_URL:
+   'https://w7.pngwing.com/pngs/761/737/png-transparent-pokemon-go-pokemon-x-and-y-pikachu-pokeball-video-game-pokemon-fantasy.png',
+
   ENVIRONMENT: process.env.ENVIRONMENT || 'dev',
 
   DATABASE: {

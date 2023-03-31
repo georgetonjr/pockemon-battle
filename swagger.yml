@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Pokemon Documentation
+  description: This is a Pokemon API
+  version: 1.0.0
+  contact:
+    email: georgetonjr@gmail.com
+servers:
+  - url: /
+paths:
+  /pokemons:
+    post:
+      tags:
+        - Pokemons
+      summary: Create a Pokemon
+      description: Create a Pokemon based on passed parameters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                tipo: 
+                  description: Tipo do pokemon
+                  type: string
+                treinador:
+                  description: Nome do treinador
+                  type: string
+      responses: 
+        200:
+          description: Created
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+    get:
+      tags:
+        - Pokemons
+      summary: List all pokemons
+      description: List All pokemons
+      responses:
+        200:
+          description: Get
+          content: 
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Pokemon'
+  /pokemons/{pokemonId}:
+    get:
+      parameters:
+          - name: pokemonId
+            in: path
+            required: true
+            description: Parameter description in CommonMark or HTML.
+            schema:
+              type : integer
+              minimum: 1
+      tags:
+        - Pokemons
+      summary: Get a pokemon
+      responses:
+        200: 
+          description: Get
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pokemon'
+    put:
+      parameters:
+          - name: pokemonId
+            in: path
+            required: true
+            description: Parameter description in CommonMark or HTML.
+            schema:
+              type : integer
+              minimum: 1
+      tags:
+        - Pokemons
+      summary: Update a pokemon
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                treinador:
+                  description: Nome do treinador
+                  type: string
+      responses:
+        204: 
+          description: No content
+    delete:
+      parameters:
+          - name: pokemonId
+            in: path
+            required: true
+            description: Parameter description in CommonMark or HTML.
+            schema:
+              type : integer
+              minimum: 1
+      tags:
+        - Pokemons
+      summary: Delete a pokemon
+      responses:
+        204: 
+          description: No content
+components:
+  schemas:
+    Pokemon:
+      properties:
+        id:
+          type: number
+          minimum: 1
+        tipo:
+          type: string
+        treinador:
+          type: string
+        nivel:
+          type: number
+          minimum: 1
