@@ -1,9 +1,12 @@
 {
-  "name": "pockemon-battle",
+  "name": "pokemon-battle",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:georgetonjr/pockemon-battle.git",
   "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rm -rf dist && tsc --build tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./dist",
