@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import '@external/dependency-injection/container';
 import { app } from './app';
 import { config } from './config';
 
