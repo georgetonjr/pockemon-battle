@@ -22,7 +22,10 @@ class PokemonEntity extends Model<Pokemon> {
         },
         tipo: DataTypes.STRING(1000),
         treinador: DataTypes.STRING(1000),
-        nivel: DataTypes.INTEGER,
+        nivel: {
+          type: DataTypes.INTEGER,
+          defaultValue: 1,
+        },
       },
       { 
         sequelize: sequelize,

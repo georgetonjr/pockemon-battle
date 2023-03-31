@@ -1,39 +1,54 @@
 import { Pokemon } from '../../../entities/pokemon';
 import { pokemonEntity } from '..';
 import { Model } from 'sequelize';
+import { injectable } from 'tsyringe';
+import { PokemonRepository, SaveOptions, UpdateOptions } from '@usecases/port/repository/pokemon-repository';
 
-export interface UpdateOptions {
-  treinador: string;
-}
-
-export class PolemonRepositorySequelize {
+@injectable()
+export class PokemonRepositorySequelize implements PokemonRepository {
   private repository;
 
   constructor() {
     this.repository = pokemonEntity;
   }
 
+  async save({ tipo, treinador }: SaveOptions): Promise<Pokemon> {
+    const result = await this.repository.create({ 
+      tipo,
+      treinador, 
+    });
+
+    return this.mapper(result);
+  }
+
   async list(): Promise<Pokemon[]> {
-    // this.repository.create({ nivel: 2, tipo: 'tu', treinador: 'mew' });
     const result = await this.repository.findAll();
-    return result.map((pokemon) => this.mapper(pokemon));
+    return result.map((pokemon: Model<Pokemon, Pokemon>) => this.mapper(pokemon));
   }
 
   async findById(id: number): Promise<Pokemon> {
-    // const result = await this.repository.findOne({ where: { id: 1 } });
     const result = await this.repository.findByPk(id);
-
+    if (!result) {
+      return;
+    }
     return this.mapper(result as Model<Pokemon, Pokemon>);
   }
 
-  async updateOne(
-    identifier: number,
-    { treinador }: UpdateOptions,
+  async updateOne({ criteria, treinador }: UpdateOptions,
   ): Promise<void> {
-    await this.repository.update({ treinador }, { where: { id: identifier } });
+    const pokemonExists = await this.repository.findByPk(criteria);
+    if (!pokemonExists) {
+      throw new Error('Pokemon not found');
+    }
+
+    await this.repository.update({ treinador }, { where: { id: criteria } });
   }
 
   async deleteOne(id: number) {
+    const pokemonExists = await this.repository.findByPk(id);
+    if (!pokemonExists) {
+      throw new Error('Pokemon not found');
+    }
     await this.repository.destroy({ where: { id } });
   }
 
