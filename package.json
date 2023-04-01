@@ -4,10 +4,15 @@
   "main": "index.js",
   "repository": "git@github.com:georgetonjr/pockemon-battle.git",
   "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
+  
   "scripts": {
-    "start": "node dist/main/server.js",
+    "start": "cross-env NODE_ENV=dev node dist/main/server.js",
     "build": "rm -rf dist && tsc --build tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./dist",
     "dev": "cross-env NODE_ENV=dev ts-node-dev -r tsconfig-paths/register --respawn ./src/main/server.ts",
+    "db": "docker-compose -f docker-compose.dev.yml up -d",
     "lint": "npx eslint . --ext .ts --fix",
     "lint:commit": "npx eslint . --ext .js,.jsx,.ts,.tsx --cache",
     "test": "cross-env NODE_ENV=test jest --coverage --passWithNoTests",
