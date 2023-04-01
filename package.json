@@ -7,10 +7,12 @@
   "engines": {
     "node": "18.x"
   },
+  
   "scripts": {
-    "start": "node dist/main/server.js",
+    "start": "cross-env NODE_ENV=dev node dist/main/server.js",
     "build": "rm -rf dist && tsc --build tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./dist",
     "dev": "cross-env NODE_ENV=dev ts-node-dev -r tsconfig-paths/register --respawn ./src/main/server.ts",
+    "db": "docker-compose -f docker-compose.dev.yml up -d",
     "lint": "npx eslint . --ext .ts --fix",
     "lint:commit": "npx eslint . --ext .js,.jsx,.ts,.tsx --cache",
     "test": "cross-env NODE_ENV=test jest --coverage --passWithNoTests",
@@ -28,6 +30,8 @@
     "sequelize": "^6.30.0",
     "swagger-ui-express": "^4.6.2",
     "tedious": "^15.1.3",
+    "tsconfig-paths": "^4.1.2",
+    "tscpaths": "^0.0.9",
     "tsyringe": "^4.7.0",
     "yamljs": "^0.3.0"
   },
@@ -60,8 +64,6 @@
     "ts-jest": "^28.0.4",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
-    "tsconfig-paths": "^4.1.2",
-    "tscpaths": "^0.0.9",
     "typescript": "^5.0.2"
   }
 }
