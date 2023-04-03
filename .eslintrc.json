@@ -88,6 +88,12 @@
        }
      ]
     },
+    "object-curly-newline": ["error", {
+      "ObjectExpression": "never",
+      "ObjectPattern": { "multiline": false },
+      "ImportDeclaration": "never",
+      "ExportDeclaration": { "multiline": false, "minProperties": 3 }
+  }],
     "settings": {
       "import/resolver": {
         "typescript": {
