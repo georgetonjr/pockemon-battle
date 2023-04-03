@@ -1,4 +1,4 @@
-# Pockemon-Battle
+# Pokemon-Battle
 
 ![Badge](https://img.shields.io/static/v1?label=POCKEMON&message=BATTLE&color=<COLOR>&style=<STYLE>&logo=<LOGO>)
 
