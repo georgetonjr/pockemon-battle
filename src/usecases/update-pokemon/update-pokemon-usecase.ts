@@ -18,9 +18,8 @@ export class UpdatePokemon extends UpdatePokemonUsecase {
   async execute(request: UpdatePokemonRequest): Promise<void> {
     try {
       await this.pokemonRepository.updateOne({ 
-        criteria: Number(request.id), 
         treinador: request.treinador, 
-      });
+      }, Number(request.id));
     } catch (error) {
       throw error;
     }

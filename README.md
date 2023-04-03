@@ -2,9 +2,13 @@
 
 ![Badge](https://img.shields.io/static/v1?label=POCKEMON&message=BATTLE&color=<COLOR>&style=<STYLE>&logo=<LOGO>)
 
+O que foi implementado
+======================
+* CRUD com pokemons
+* Batalha de pokemons
+  
 Tecnologias utilizadas
 ======================
-
 * NodeJS: v18.15.0
 * TypeScript
 * Jest

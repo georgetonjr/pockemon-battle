@@ -2,12 +2,14 @@ import { CreatePokemonController } from '@adapters/controllers/create-pokemon/cr
 import { DeletePokemonController } from '@adapters/controllers/delete-pokemon/delete-pokemon-controller';
 import { GetPokemonController } from '@adapters/controllers/get-pokemon/get-pokemon-controller';
 import { ListPokemonController } from '@adapters/controllers/list-pokemon/list-pokemon-controller';
+import { PokemonBattleController } from '@adapters/controllers/pokemon-battle/pokemon-battle-controller';
 import { UpdatePokemonController } from '@adapters/controllers/update-pokemon/update-pokemon-controller';
 import { PokemonRepositorySequelize } from '@external/orm/repositories/pokemon-repository-sequelize';
 import { CreatePokemon } from '@usecases/create-pokemon/create-pokemon-usecase';
 import { DeletePokemon } from '@usecases/delete-pokemon/delete-pokemon-usecase';
 import { GetPokemon } from '@usecases/get-pokemon/get-pokemon-usecase';
 import { ListPokemon } from '@usecases/list-pokemons/list-pokemon-usecase';
+import { PokemonBattle } from '@usecases/pokemon-battle/pokemon-battle-usecase';
 import { UpdatePokemon } from '@usecases/update-pokemon/update-pokemon-usecase';
 import { Lifecycle, container } from 'tsyringe';
 
@@ -17,6 +19,7 @@ container.register('UpdatePokemonController', { useClass: UpdatePokemonControlle
 container.register('ListPokemonController', { useClass: ListPokemonController });
 container.register('GetPokemonController', { useClass: GetPokemonController });
 container.register('DeletePokemonController', { useClass: DeletePokemonController });
+container.register('PokemonBattleController', { useClass: PokemonBattleController });
 
 // usecase
 container.register('CreatePokemonUsecase', { useClass: CreatePokemon });
@@ -24,6 +27,7 @@ container.register('GetPokemonUsecase', { useClass: GetPokemon });
 container.register('ListPokemonUsecase', { useClass: ListPokemon });
 container.register('DeletePokemonUsecase', { useClass: DeletePokemon });
 container.register('UpdatePokemonUsecase', { useClass: UpdatePokemon });
+container.register('PokemonBattleUsecase', { useClass: PokemonBattle });
 
 // repository
 container.register('PokemonRepository', { useClass: PokemonRepositorySequelize }, { lifecycle: Lifecycle.Singleton });

@@ -32,6 +32,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pokemon'
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
     get:
       tags:
         - Pokemons
@@ -46,6 +50,12 @@ paths:
                 type: array
                 items: 
                   $ref: '#/components/schemas/Pokemon'
+        400:
+          description: Bad request
+        404:
+          description: Pokemon not found
+        500:
+          description: Internal server error
   /pokemons/{pokemonId}:
     get:
       parameters:
@@ -89,6 +99,12 @@ paths:
       responses:
         204: 
           description: No content
+        400:
+          description: Bad request
+        404:
+          description: Pokemon not found
+        500:
+          description: Internal server error
     delete:
       parameters:
           - name: pokemonId
@@ -104,6 +120,49 @@ paths:
       responses:
         204: 
           description: No content
+        400:
+          description: Bad request
+        404:
+          description: Pokemon not found
+        500:
+          description: Internal server error
+  /batalhar/{pokemonAId}/{pokemonBId}:
+    post:
+      tags:
+        - Batalhar
+      parameters:
+        - name: pokemonAId
+          in: path
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            minimum: 1
+        - name: pokemonBId
+          in: path
+          required: true
+          description: Parameter description in CommonMark or HTML.
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        200: 
+          description: put
+          content: 
+            application/json:
+              schema:
+                properties:
+                  vencedor:
+                    $ref: '#/components/schemas/Pokemon'
+                  perdedor: 
+                    $ref: '#/components/schemas/loserPokemonReponse'
+        400:
+          description: Bad request
+        404:
+          description: Pokemon not found
+        500:
+          description: Internal server error
+                
 components:
   schemas:
     Pokemon:
@@ -118,3 +177,18 @@ components:
         nivel:
           type: number
           minimum: 1
+    loserPokemonReponse:
+      properties:
+        id:
+          type: number
+          minimum: 1
+        tipo:
+          type: string
+        treinador:
+          type: string
+        nivel:
+          type: number
+          minimum: 1
+        message: 
+          type: string
+        

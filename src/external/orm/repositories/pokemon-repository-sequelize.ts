@@ -12,6 +12,15 @@ export class PokemonRepositorySequelize implements PokemonRepository {
     this.repository = pokemonEntity;
   }
 
+  async      updateOne(updateOptions: UpdateOptions, id: number): Promise<void> {
+    const pokemonExists = await this.repository.findByPk(id);
+    if (!pokemonExists) {
+      throw new Error('Pokemon not found');
+    }
+
+    await this.repository.update(updateOptions, { where: { id } });
+  }
+
   async save({ tipo, treinador }: SaveOptions): Promise<Pokemon> {
     const result = await this.repository.create({ 
       tipo,
@@ -32,16 +41,6 @@ export class PokemonRepositorySequelize implements PokemonRepository {
       return;
     }
     return this.mapper(result as Model<Pokemon, Pokemon>);
-  }
-
-  async updateOne({ criteria, treinador }: UpdateOptions,
-  ): Promise<void> {
-    const pokemonExists = await this.repository.findByPk(criteria);
-    if (!pokemonExists) {
-      throw new Error('Pokemon not found');
-    }
-
-    await this.repository.update({ treinador }, { where: { id: criteria } });
   }
 
   async deleteOne(id: number) {
