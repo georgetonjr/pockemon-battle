@@ -5,7 +5,10 @@ const tipos = ['charizard', 'mewtwo', 'pikachu'];
 
 export const pokemonMock = {
   id: faker.datatype.number(),
-  nivel: faker.datatype.number({ max: 2 }),
+  nivel: faker.datatype.number({ 
+    min: 1,
+    max: 15,
+  }),
   tipo: tipos[faker.datatype.number({ max: 2 })],
   treinador: faker.datatype.string(),
 } as Pokemon;
