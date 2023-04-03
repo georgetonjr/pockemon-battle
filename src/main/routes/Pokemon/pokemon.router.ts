@@ -2,12 +2,15 @@ import { ContainerVersion, injectionFactory } from '@external/dependency-injecti
 import { adapterController } from '@external/http/express-controller-adapter';
 import { Router } from 'express';
 import { Controller } from '@adapters/port/controller';
+import { CreatePokemonValidator } from '@main/middleware/create-pokemon-validator-middleware';
+import { UpdatePokemonValidator } from '@main/middleware/update-pokemon-validator-middleware';
 
 export const PokemonRouter = Router();
 
 PokemonRouter.post(
   '/pokemons',
   [
+    CreatePokemonValidator,
     adapterController(injectionFactory<Controller>('CreatePokemonController', ContainerVersion.DEFAULT)),
   ],
 );
@@ -32,6 +35,7 @@ PokemonRouter.get(
 PokemonRouter.put(
   '/pokemons/:id',
   [
+    UpdatePokemonValidator,
     adapterController(injectionFactory<Controller>('UpdatePokemonController', ContainerVersion.DEFAULT)),
   ],
 );
