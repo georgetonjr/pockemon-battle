@@ -6,7 +6,11 @@ O que foi implementado
 ======================
 * CRUD com pokemons
 * Batalha de pokemons
-  
+
+Documentação swagger
+======================
+  [swagger link](https://pokemon-battle.onrender.com/doc)
+
 Tecnologias utilizadas
 ======================
 * NodeJS: v18.15.0
