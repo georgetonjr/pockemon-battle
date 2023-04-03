@@ -4,8 +4,8 @@ import Joi from 'joi';
 
 export const CreatePokemonValidator = (req: Request, res: Response, next: NextFunction) => {
   const CreatePokemonSchema = Joi.object<CreatePokemonRequest>().keys({
-    tipo: Joi.string().required(),
-    treinador: Joi.string().valid('charizard', 'mewtwo', 'pikachu').required(),
+    tipo: Joi.string().valid('charizard', 'mewtwo', 'pikachu').required(),
+    treinador: Joi.string().required(),
   });
   const { error } = CreatePokemonSchema.validate(req.body)  
   if (error) {
