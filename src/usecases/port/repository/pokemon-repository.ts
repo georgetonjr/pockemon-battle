@@ -1,8 +1,9 @@
 import { Pokemon } from '@entities/pokemon';
 
 export interface UpdateOptions {
-  criteria: number;
-  treinador: string;
+  treinador?: string;
+  tipo?: string;
+  nivel?: number;
 }
 
 export interface SaveOptions {
@@ -14,6 +15,6 @@ export interface PokemonRepository {
   save(options: SaveOptions): Promise<Pokemon>;
   list(): Promise<Pokemon[]>;
   findById(id: number): Promise<Pokemon>;
-  updateOne(data: UpdateOptions): Promise<void>;
+  updateOne(updateOptions: UpdateOptions, id: number): Promise<void>;
   deleteOne(id: number): Promise<void>;
 }
